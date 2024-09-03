@@ -56,3 +56,40 @@ Original values: 1st = -4 2nd = 288
 Swapped values: 1st = 288 2nd = -4
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    //Declare an integer pointer and allocate memory for an array of 2 integers
+    int *int_ptr = (int *)malloc(2 * sizeof(int));
+
+    //Check if malloc() failed to return memory
+    if (int_ptr == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1; // Terminate the program
+    }
+
+    //Prompt the user to enter the first integer
+    printf("Enter the first integer: ");
+    scanf("%d", &int_ptr[0]);
+
+    //Prompt the user to enter the second integer
+    printf("Enter the second integer: ");
+    scanf("%d", &int_ptr[1]);
+
+    //Print the original values of both integers
+    printf("Original values: First Integer = %d, Second Integer = %d\n", int_ptr[0], int_ptr[1]);
+
+    //Swap the integers using bitwise XOR
+    int_ptr[0] = int_ptr[0] ^ int_ptr[1]; // First step
+    int_ptr[1] = int_ptr[0] ^ int_ptr[1]; // Second step
+    int_ptr[0] = int_ptr[0] ^ int_ptr[1]; // Third step
+
+    //Print the swapped values
+    printf("Swapped values: First Integer = %d, Second Integer = %d\n", int_ptr[0], int_ptr[1]);
+
+    //Free the allocated memory
+    free(int_ptr);
+
+    return 0;
+}
