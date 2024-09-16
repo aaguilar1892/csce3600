@@ -19,6 +19,10 @@
 # -rw------- 1 mat0299 mat0299 2055 Oct 4 09:38 minor1.c
 # -rw------- 1 mat0299 mat0299 3145 Oct 8 19:47 minor2.c
 
+# Alexis Aguilar (aa1732)
+# Fall 2024 CSCE 3600 - Systems Programming
+# Recitation 4
+
 #!/usr/bin/bash
 
 # prompt user for command

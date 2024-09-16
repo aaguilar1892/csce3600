@@ -11,6 +11,10 @@
 # $ ./rec04A.sh
 # Hope you have a great day!
 
+# Alexis Aguilar (aa1732)
+# Fall 2024 CSCE 3600 - Systems Programming
+# Recitation 4
+
 #!/usr/bin/bash
 
 # checking if a name was provide

@@ -21,6 +21,10 @@
 # Enter a number between 1 and 10: **2**
 # Congratulations, the number is 2.
 
+# Alexis Aguilar (aa1732)
+# Fall 2024 CSCE 3600 - Systems Programming
+# Recitation 4
+
 #!/usr/bin/bash
 
 # make random number 1 <= x <= 10
