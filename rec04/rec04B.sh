@@ -20,3 +20,14 @@
 # -rw------- 1 mat0299 mat0299 3145 Oct 8 19:47 minor2.c
 
 #!/usr/bin/bash
+
+# prompt user for command
+echo "Please enter a Linux command to execute: "
+read user_command
+
+# print out command entered
+echo "You have entered the command: $user_command"
+echo "Executing command now..."
+
+# execute command
+eval $user_command
