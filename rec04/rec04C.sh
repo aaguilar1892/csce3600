@@ -22,3 +22,23 @@
 # Congratulations, the number is 2.
 
 #!/usr/bin/bash
+
+# make random number 1 <= x <= 10
+random_number=$(( RANDOM % 10 + 1 ))
+
+# initialize empty guess variable
+guess=0
+
+# loop to repeat prompting user for guess
+while [ "$guess" -ne "$random_number" ]; do
+    # prompt user to enter number 1 <= x <= 10
+    echo ":D Heheheh guess a number between 1 and 10: "
+    read guess
+
+    # check if guess is correct
+    if [ "$guess" -eq "$random_number" ]; then
+        echo ";P Woohoo you guessed the correct number: $random_number."
+    else
+        echo ">:~( Wrong guess, try again!"
+    fi
+done
