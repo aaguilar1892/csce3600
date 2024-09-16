@@ -13,3 +13,11 @@
 
 #!/usr/bin/bash
 
+# checking if a name was provide
+if [ $# -eq 0 ]; then
+    # for no name
+    echo "Hope you have a great day!"
+else
+    # yes name, greet with name
+    echo "Good day, $1! Nice to meet you!"
+fi
