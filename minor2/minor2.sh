@@ -58,6 +58,10 @@
 #!/bin/bash
 
 # minor2.sh
+# Alexis Aguilar (aa1732)
+# CSCE 3600.004 - Principles of Systems Programming
+# Fall 2024 - 09/25/2024
+
 # Script to monitor user login/logout activities on the current CSE Linux machine
 # It checks every 10 seconds and reports changes
 # Includes custom signal handler for SIGINT
