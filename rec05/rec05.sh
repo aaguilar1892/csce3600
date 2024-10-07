@@ -58,3 +58,41 @@
 # CSCE 3600.208 Fall 2024
 # 10/07/2024
 # Recitation 05
+
+#!/bin/bash
+
+# Function to curve grades
+curve() {
+    incr=$1        # Assign first argument to incr (the curve amount)
+    shift          # Shift the positional parameters to the left, removing the first argument (incr)
+    arr=("$@")     # Assign the rest of the arguments (grades) to arr
+    
+    index=0        # Initialize index to 0
+    
+    # Iterate over the array of grades
+    for i in "${arr[@]}"; do
+        let grades[$index]=$i+$incr  # Apply the curve and assign it back to the grades array
+        let index=$index+1            # Increment index by 1
+    done
+}
+
+# Check if the number of arguments is not equal to 1
+if [ $# -ne 1 ]; then
+    echo "usage: $0 <curve amount>"
+    exit 1
+fi
+
+# Read grades from the user
+for (( i=1; i<=5; i++ )); do
+    read -p "Enter QUIZ #$i: " grade  # Prompt the user to enter a grade
+    grades[$((i-1))]=$grade            # Store the entered grade in the grades array
+done
+
+# Call the curve function with the curve amount and the grades array
+curve $1 "${grades[@]}"
+
+# Output the curved grades
+echo "Curved Grades:"
+for (( i=0; i<${#grades[@]}; i++ )); do
+    echo "grades[$i] = ${grades[$i]}"
+done
