@@ -24,3 +24,33 @@ Now, on the command line, enter the ps -u $USER command to see your existing
 processes. You should notice that this zombie process no longer exists as it has been
 reaped by the init/systemd process.
 */
+
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/types.h>
+
+int main() {
+    // Declare the variable pid of type pid_t
+    pid_t pid;
+
+    // Call fork() and assign its return value to pid
+    pid = fork();
+
+    // Check for child process, parent process, and error cases
+    if (pid == 0) {
+        // Child process: exit immediately
+        exit(0);
+    }
+    else if (pid > 0) {
+        // Parent process: sleep for 5 seconds, then call system command to check processes
+        sleep(5);
+        system("ps -e -o pid,ppid,stat,user,cmd | grep $USER");
+    }
+    else {
+        // Error case: fork() failed
+        perror("fork error");
+    }
+
+    return 0;
+}
