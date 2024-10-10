@@ -34,3 +34,47 @@ your existing processes. You should notice your child process is still running, 
 over as the parent (since our parent terminated) and will handle the child once it has
 terminated
 */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+int main() {
+    // Declare the char pointer variable name
+    char *name;
+
+    // Declare the variable pid of type pid_t
+    pid_t pid;
+
+    // Call fork() and assign its return value to pid
+    pid = fork();
+
+    // Check for child process, parent process, and error cases
+    if (pid == 0) {
+        // Child process: print information and go to sleep
+        printf("child: %d started\n", getpid());
+        printf("child: parent = %d\n", getppid());
+        printf("child: going to sleep...\n");
+        sleep(20); // Sleep for 20 seconds
+        printf("child: just woke up\n");
+    }
+    else if (pid > 0) {
+        // Parent process: print information and exit
+        printf("parent: %d started\n", getpid());
+        printf("parent: parent = %d\n", getppid());
+        // Parent process terminates here (creating an orphaned child)
+    }
+    else {
+        // Error case: fork() failed
+        perror("fork error");
+    }
+
+    // Assign "child" to name if pid is 0, otherwise assign "parent"
+    name = (pid == 0) ? "child" : "parent";
+
+    // Print termination message
+    printf("%s: terminating...\n", name);
+
+    return 0;
+}
