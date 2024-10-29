@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 	struct sockaddr_in serv_addr;
  
 	memset(recvBuff, '0', sizeof(recvBuff));
-	if ((sockfd = socket(  ?  )) < 0)
+	if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 	{
 		printf("socket error\n");
 		exit(EXIT_FAILURE);
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	serv_addr.sin_port = htons(portno);
 	serv_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
  
-	if (connect(  ?  ) < 0)
+	if (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0)
 	{
 		printf("connect error\n");
 		exit(EXIT_FAILURE);

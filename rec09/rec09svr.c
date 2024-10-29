@@ -13,17 +13,21 @@
  
 int main(int argc, char *argv[])
 {
-	int listenfd = 0, connfd = 0, cli_size, portno;
-
+	int listenfd = 0, connfd = 0, portno;
+	socklen_t cli_size; //fixing the type of cli_size warning
 	struct sockaddr_in serv_addr, cli_addr;
 
 	char sendBuff[1025];  
  
-	if ((listenfd = socket(  ?  )) == -1)
+	if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
 	{
 		printf("socket error\n");
 		exit(EXIT_FAILURE);
 	}
+
+	// adding socket option to reuse the address
+	int on = 1;
+    setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 
 	memset(&serv_addr, '0', sizeof(serv_addr));
 	memset(sendBuff, '0', sizeof(sendBuff));
@@ -33,14 +37,14 @@ int main(int argc, char *argv[])
 	portno = atoi(argv[1]);
 	serv_addr.sin_port = htons(portno);    
 
-	if (bind(  ?  ) == -1)
+	if (bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == -1)
 	{
 		printf("bind error\n");
 		exit(EXIT_FAILURE);
 	}
 
 
-	if (listen(  ?  ) == -1)
+	if (listen(listenfd, 10) == -1)
 	{
 		printf("listen error\n");
 		exit(EXIT_FAILURE);
@@ -49,7 +53,7 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		cli_size = sizeof(cli_addr);
-		if ((connfd = accept(  ?  )) == -1)
+		if ((connfd = accept(listenfd, (struct sockaddr*)&cli_addr, &cli_size)) == -1)
 		{
 			printf("accept error\n");
 			exit(EXIT_FAILURE);
