@@ -23,16 +23,16 @@ int main(int argc, char **argv)
 		ofp = open(argv[3], O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
 
 		// duplicate input file to stdin
-        dup2(?);
+        dup2(ifp, 0);
 
 		// duplicate output file to stdout
-		
+		dup2(ofp, 1);
 
 		// close unused input file descriptor
-		
+		close(ifp);
         
 		// close unused output file descriptor
-        
+        close(ofp);
 
 		// execute grep
 		execvp("grep", grep_args);
